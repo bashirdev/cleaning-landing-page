@@ -19,10 +19,10 @@ const PricingCard = ({icon, title,price, des1, des2, des3, des4}) => {
         
         </div>
        <div className="flex flex-col justify-center items-start ">
-       <p className='group-hover:text-white pb-2'><hr className='w-2 h-2 bg-blackColor opacity-[0.7] group-hover:bg-white rounded-full float-left mr-3 mt-2' />{des1}</p>
-       <p className='group-hover:text-white pb-2'><hr className='w-2 h-2 bg-blackColor opacity-[0.7] group-hover:bg-white rounded-full float-left mr-3 mt-2' />{des2}</p>
-       <p className='group-hover:text-white pb-2'><hr className='w-2 h-2 opacity-[0.7] bg-blackColor group-hover:bg-white rounded-full float-left mr-3 mt-2' />{des3}</p>
-       <p className='group-hover:text-white pb-2'><hr className='w-2 h-2 opacity-[0.7] bg-blackColor group-hover:bg-white rounded-full float-left mr-3 mt-2' />{des4}</p>
+       <p className='group-hover:text-white pb-2'><span className='w-2 h-2 bg-blackColor opacity-[0.7] group-hover:bg-white rounded-full float-left mr-3 mt-2'  ></span>{des1}</p>
+       <p className='group-hover:text-white pb-2'><span className='w-2 h-2 bg-blackColor opacity-[0.7] group-hover:bg-white rounded-full float-left mr-3 mt-2' ></span>{des2}</p>
+       <p className='group-hover:text-white pb-2'><span className='w-2 h-2 opacity-[0.7] bg-blackColor group-hover:bg-white rounded-full float-left mr-3 mt-2' ></span>{des3}</p>
+       <p className='group-hover:text-white pb-2'><span className='w-2 h-2 opacity-[0.7] bg-blackColor group-hover:bg-white rounded-full float-left mr-3 mt-2' ></span>{des4}</p>
        </div>
        <Button text="Buy Now"  navButton='bg-greenColor text-center w-[220px] cursor-pointer z-12 py-[13px] px-[32px] w-full rounded-sm mt-2 text-white text-[14px] font:bold group-hover:bg-white group-hover:text-greenColor' href="#home" />
     </div>

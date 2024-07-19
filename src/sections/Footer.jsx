@@ -1,9 +1,54 @@
 
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from 'react';
 import Button from './../components/Button';
+import ScrollHandler from './ScrollHandler';
 const Footer = () => {
+   const [show, setShow] = useState(false)
+   const [isScrolled, setIsScrolled] = useState(false);
+const targetRef = useRef(null);
+const handleScrollAboveThreshold = () => {
+  setIsScrolled(true);
+};
+
+const handleScrollBelowThreshold = () => {
+  setIsScrolled(false);
+};
+
+
+
+
+useEffect(()=>{
+ window.addEventListener('scroll', ()=>{
+   if(window.scrollY > 100){
+     setShow(true)
+   }else{
+     setShow(false)
+   }
+   return()=>{
+  
+    window.removeEventListener('scroll') 
+  }
+ })
+
+},[])
+
   return (
-    <footer className='w-full py-10 relative bg-greenColor h-full'>
-         <div className="custom-padding ">
+    <footer ref={targetRef} className='w-full pt-10 relative bg-greenColor h-full'>
+      <ScrollHandler 
+    threshold={targetRef}
+    onScrollAboveThreshold={handleScrollAboveThreshold}
+    onScrollBelowThreshold={handleScrollBelowThreshold}
+
+/>
+<AnimatePresence mode='awit'>
+
+         <motion.div 
+          initial={{ y: 25, opacity: 0 } }
+            animate={isScrolled === true ? { y: 0, opacity: 1 } : null}
+            exit={!isScrolled === true ? { y: -25, opacity: 0 } : null}
+            transition={!isScrolled === true ? { duration: 0.8 }: null}
+         className="custom-padding ">
          <div className="grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 max-xs:grid-cols-1 ">
          {/* first Section */}
               <div className="col-span1">
@@ -90,8 +135,12 @@ const Footer = () => {
 
               </div>
           </div>
-         </div>
-
+         </motion.div>
+</AnimatePresence>
+  <div className='w-full h-[12px] text-center mt-10 '>
+<pre className='py-4 bg-[#166534] text-[#f3f3f3]'>  &copy;{new Date().getFullYear()}  by Bashir Ahammed</pre>
+  </div>
+  <a href='#home' className={show === true ? 'back2Top smooth-scroll p-3 z-110' : 'back2Top hide'}>TOP</a>
     </footer>
   )
 }

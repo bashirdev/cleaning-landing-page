@@ -24,9 +24,9 @@ export const clientLogo=[
     {id:5, logo:logo5},
 ]
 // WhyChooseUs
-import image1 from '../assets/images/cleaner.png'
+import image2 from '../assets/images/cleaner.png'
+import image1 from '../assets/images/cleanerWhy.png'
 import image3 from '../assets/images/HeroImage.png'
-import image2 from '../assets/images/weHeroImage.png'
 
 //pricing content
 import bigBrushPrice from '../assets/icons/brush.png'
@@ -56,7 +56,7 @@ export const clientReviews=[
         name:'John Due' , 
         profession:'Designer', 
         highLigtText:'Exavir',
-        comment:'Services went above and beyond to make my home spotless. The attention to detail and professionalism of their team exceeded my expectations.'
+        comment:'Services  The attention to detail and professionalism of their team exceeded my expectations. The attention to detail and professionalism'
         },
     {   
         id:2, 
@@ -79,10 +79,11 @@ export const clientReviews=[
 
 export const navLinks = [
     { href: "#home", label: "Home" },
-    { href: "#about-us", label: "About Us" },
+    { href: "#aboutus", label: "About Us" },
     { href: "#services", label: "Services" },
-    { href: "#blog", label: "Blog" },
-    { href: "#contact-us", label: "Contact Us" },
+    { href: "#chooseus", label: "WhyChoose Us" },
+    { href: "#pricing", label: "Pricing" },
+    { href: "#contactus", label: "Contact Us" },
 ];
 
 

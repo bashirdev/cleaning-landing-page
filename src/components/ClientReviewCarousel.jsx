@@ -34,11 +34,11 @@ useEffect(()=>{
 },[clientReviews.length])
 
   return (
-    <div className="relative">
-    <div className="relative overflow-hidden rounded-tr-md rounded-br-md h-full ">
+    <div className='relative'>
+
     {clientReviews?.map((item, index)=>(
         <div key={item.id}
-     className={`bg-[#f3f3f3] p-4 absolute inset-0 transition-opacity duration-500 ease-in-out ${
+     className={`bg-[#f3f3f3] p-4 absolute inset-0   transition-opacity duration-500 ease-in-out ${
               index === currentIndex ? 'opacity-100' : 'opacity-0'
             }`} > 
          <p className='z-10 relative text-[16px] font-medium text-blackColor font-raleway leading-6 w-full'><span className='text-greenColor'>{item?.highLigtText}:</span> 
@@ -56,10 +56,7 @@ useEffect(()=>{
        </div>
        
     ))}
-     
- 
   
-    </div>
     <button
  onClick={handlePrev}
  className={`${ isPrevClicked ? "bg-yellowColor absolute -bottom-20 right-16 transform -translate-y-1/2  text-[#f3f3f3] p-2 rounded-md w-[40px] h-[40px] focus:outline-none" : "absolute -bottom-20 right-16 transform -translate-y-1/2 bg-[#f3f3f3] text-blackColor p-2 rounded-md w-[40px] h-[40px] focus:outline-none" } `}

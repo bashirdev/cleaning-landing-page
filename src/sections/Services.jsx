@@ -1,19 +1,46 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { useRef, useState } from 'react';
 import icon from '../assets/icons/rightArrow.png';
 import SectionTitle from '../components/SectionTitle';
 import ServiceBanner from '../components/ServiceBanner';
 import { cardItems, serviceHistory } from '../constant';
 import Button from './../components/Button';
+import ScrollHandler from './ScrollHandler';
+
 const Services = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const targetRef = useRef(null);
+
+  const handleScrollAboveThreshold = () => {
+    setIsScrolled(true);
+  };
+
+  const handleScrollBelowThreshold = () => {
+    setIsScrolled(false);
+  };
+
   return (<>
-    <section className="bg-[#F0FDF4] w-full py-[80px] mt-[60px] max-container">
-    <div className=" pr-[150px] pl-[150px]">
+    <section ref={targetRef} className="bg-[#F0FDF4] w-full py-[80px] mt-[60px] custom-padding">
+    <ScrollHandler 
+    threshold={targetRef}
+        onScrollAboveThreshold={handleScrollAboveThreshold}
+        onScrollBelowThreshold={handleScrollBelowThreshold}
+
+    />
+      <AnimatePresence mode="await">
+    <motion.div
+          initial={{ y: 20, opacity: 0 } }
+            animate={isScrolled === true ? { y: 0, opacity: 1 } : null}
+            exit={!isScrolled === true ? { y: -20, opacity: 0 } : null}
+            transition={!isScrolled === true ? { duration: 0.5 }: null}
+     className="">
     <SectionTitle topTitle='OUR BEST SERVICES' mainTile='Our Most Popular Cleaning' 
     mainTileHighlight='Services'
     mainTitleLasttext='For You' />
 
-     <div className=" mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div className=" mt-10 flex justify-between items-center flex-wrap gap-6">
      {cardItems.map((item)=>(
-      <div key={item.id} className="relative w-[325px] h-full   bg-gray-50 shadow-lg p-6">
+      <div key={item.id} className="relative w-[325px] max-md:w-auto max-lg:w-auto max-sm:w-auto   h-full   bg-gray-50 shadow-lg p-6">
        
        <div className="flex items-start justify-start ">
           <img src={item.icon} className='h-full' alt="" srcSet="" />
@@ -30,14 +57,17 @@ const Services = () => {
        
      </div>
 
-    </div>
-       
+    </motion.div>
+    </AnimatePresence>
     </section>
-    <section className="relative w-full bg-successStoryBg  bg-center bg-cover ">
-  <div className="h-[264px] flex justify-between items-center pr-[150px] pl-[150px]  ">
-    {serviceHistory.map(item=> <ServiceBanner key={item.id}  {...item} /> )}
+    <section  className="relative w-full bg-successStoryBg  bg-center bg-cover ">
+   
+   
+  <div className="h-[264px] max-sm:h-full max-sm:py-3 flex justify-between items-center flex-wrap custom-padding  ">
+    {serviceHistory.map(item=> <ServiceBanner duration={1} endTime={item.title} key={item.id}  {...item} /> )}
     
     </div>
+
     </section>
      
     </>
