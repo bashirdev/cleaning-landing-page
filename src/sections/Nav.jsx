@@ -28,7 +28,9 @@ const Nav = () => {
 
   return (
  <header className='mt-5 absolute z-20 w-full'>
-   <nav className={`${scrollDown === true ? "fixed  justify-between items-center duration-700 ease-linear delay-100 right-0 left-0 top-0  inline-block gap-10 bg-yellowColor" : 'flex justify-between items-center custom-padding'} flex justify-between items-center custom-padding`}>
+   <nav className={`${scrollDown === true ? "fixed  justify-between max-lg:m-[-100px]  items-center duration-700 ease-linear delay-100 right-0 left-0 top-0  inline-block gap-10 bg-yellowColor " : 
+   'flex justify-between items-center custom-padding'}
+    flex justify-between items-center custom-padding`}>
        <a href="">
         <img className='z-20 w-full h-full' src={logo} alt="Logo"  />
        </a>
@@ -49,7 +51,7 @@ const Nav = () => {
        {/* <div className='hidden max-lg:block max-lg:mr-[80px] max-md:mr-[50px] max-sm:mr-[0px] max-xs:mr-[0px] '>
           <img id='hamburgerIcon' onClick={handleShow} src={hamburger} alt='hamburger icon' width={25} height={25} />
         </div> */}
-        <div  onClick={handleShow}  className="hidden fixed right-[47px] top-[5px] bg-yellowColor px-8 py-6 h-10 w-10 rounded-md  max-lg:flex justify-center items-center max-lg:mr-[80px] max-md:mr-[50px] max-sm:mr-[0px] max-xs:mr-[0px] ">
+        <div  onClick={handleShow}  className="hidden fixed right-[47px] top-[5px] bg-yellowColor px-8 py-6 h-10 w-10 rounded-md  max-lg:flex justify-center items-center max-lg:mr-[80px] max-md:mr-[50px] max-sm:mr-[0px] max-xs:mr-[0px] z-50">
          <div className="py-3 hidden fixed right-[47px] top-[12px] bg-yellowColor px-8  h-10 w-10 rounded-md  max-lg:flex justify-center items-center max-lg:mr-[80px] max-md:mr-[50px] max-sm:mr-[0px] max-xs:mr-[0px]">
            <div className={`${show === true ? "-rotate-45 top-[15px] " : "rotate-0"} absolute top-2 left-4 w-[32px] h-[2px] bg-greenColor first`}></div>
            <div className={`${show === true ? "translate-x-[500px] duration-700" : "translate-x-0 duration-700"} absolute top-4 left-4 w-[32px] h-[2px] bg-greenColor  middle`}></div>

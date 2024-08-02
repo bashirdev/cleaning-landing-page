@@ -1,16 +1,19 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import icon from '../assets/icons/rightArrow.png';
 import SectionTitle from '../components/SectionTitle';
 import ServiceBanner from '../components/ServiceBanner';
 import { cardItems, serviceHistory } from '../constant';
 import Button from './../components/Button';
 import ScrollHandler from './ScrollHandler';
-
 const Services = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const targetRef = useRef(null);
-
+  const { ref, inView } = useInView({
+    triggerOnce: false, // Trigger only once
+    threshold: 0.1, // Trigger when 10% of the section is visible
+  });
   const handleScrollAboveThreshold = () => {
     setIsScrolled(true);
   };
@@ -60,11 +63,11 @@ const Services = () => {
     </motion.div>
     </AnimatePresence>
     </section>
-    <section  className="relative w-full bg-successStoryBg  bg-center bg-cover ">
+    <section ref={ref} className="relative w-full bg-successStoryBg  bg-center bg-cover ">
    
    
-  <div className="h-[264px] max-sm:h-full max-sm:py-3 flex justify-between items-center flex-wrap custom-padding  ">
-    {serviceHistory.map(item=> <ServiceBanner duration={1} endTime={item.title} key={item.id}  {...item} /> )}
+  <div  className="h-[264px] max-sm:h-full max-sm:py-3 flex justify-between items-center flex-wrap custom-padding  ">
+    {serviceHistory.map(item=> <ServiceBanner inView={inView} duration={1} endTime={item.title} key={item.id}  {...item} /> )}
     
     </div>
 

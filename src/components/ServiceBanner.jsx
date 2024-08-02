@@ -1,5 +1,7 @@
 import CountUp from 'react-countup';
-const ServiceBanner = ({icon, title,duration, endTime, plus,description}) => {
+
+
+const ServiceBanner = ({icon, title,duration, endTime, plus,description, inView}) => {
  
  
   return (
@@ -10,7 +12,7 @@ const ServiceBanner = ({icon, title,duration, endTime, plus,description}) => {
       
      
         <h6 className='font-raleway font-semibold text-[56px]'>
-       <CountUp delay={duration} end={endTime} />
+       {inView ? <CountUp delay={duration} end={endTime} /> : null}
          <span>{plus ? plus : null}</span> 
          </h6>
      

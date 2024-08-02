@@ -9,36 +9,22 @@ import Button from "../components/Button";
 import MapView from '../components/MapView';
 import SectionTitle from './../components/SectionTitle';
 import ScrollHandler from './ScrollHandler';
+
 // const URL= "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+
+
+
+
 const Contactus = () => {
+
   const targetRef=useRef();
   const [viewMap, setViewMap] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false);
   const [storeLatLng, setStoreLatLng] = useState({})
   const [isChecked, setIsChecked] = useState(false);
-  useEffect(()=>{
-    const getCOodinatens=async()=>{
-      if(isChecked){
-
-        const {lat, lng}=await window.localStorage.getItem('positions') ?  (JSON.parse(window.localStorage.getItem('positions'))) : null ;
-        console.log(lat, lng)
-        setStoreLatLng({lat, lng})
-      }
-    }
-getCOodinatens()
-    
-  }, [])
-
-
-const googleMapsUrl = `https://www.google.com/maps?q=${storeLatLng.lat}&${storeLatLng.lng}&z=15`;
-console.log(storeLatLng.lat, storeLatLng.lng)
-
-  // if(window.navigator){
-  //   window.navigator.geolocation.watchPosition((position)=>{
-  //     const {latitude, longitude ,accuracy} = position.coords;
-  //     setUserPosition({latitude, longitude, accuracy})
-  //   })
-  // }
+  const [mapLink, setMapLink] = useState(``)
+  const googleMapsUrl = `https://www.google.com/maps?q=${storeLatLng?.lat},${storeLatLng?.lng}`;
+  console.log(googleMapsUrl)
 
   const customIcon = new L.Icon({
     iconUrl: iconMap,
@@ -50,16 +36,13 @@ console.log(storeLatLng.lat, storeLatLng.lng)
     shadowSize: [41, 41]
   });
   
- 
-
-
-
 const [formData, setFormData] = useState({
    name: '',
    email: '',
    contactNum:'',
    services:'',
    message: '' ,
+   location:mapLink,
  });
 
  const handleChange = (e) => {
@@ -94,10 +77,13 @@ const [formData, setFormData] = useState({
       contactNum:'',
       services:'',
       message: '',
+      location:''
    });
  };
 
-
+useEffect(()=>{
+  setMapLink(`https://www.google.com/maps?q=${storeLatLng?.lat},${storeLatLng?.lng}`)
+},[])
 
 
 
@@ -145,21 +131,26 @@ threshold={targetRef}
             <form onSubmit={handleSubmit}>
 
                 <div className='my-4 flex justify-center items-center gap-4 w-full'>
-                   <input className='mt-1 px-3 py-2 bg-transparent border  border-[#f3f3f3] placeholder-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1' type="text" name="name" value={formData.name}  onChange={handleChange} id="" placeholder='Full Name*' required />
-                   <input className='mt-1 px-3 py-2 bg-transparent border  border-[#f3f3f3] placeholder-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1' type="email" name="email" value={formData.email}  onChange={handleChange} id="" placeholder='Email*' required />
+                   <input style={{ color: 'white' }} className='mt-1 px-3 py-2 bg-transparent border  border-[#f3f3f3] placeholder-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1' type="text" name="name" value={formData.name}  onChange={handleChange} id="" placeholder='Full Name*' required />
+                   <input style={{ color: 'white' }} className='mt-1 px-3 py-2 bg-transparent border  border-[#f3f3f3] placeholder-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1' type="email" name="email" value={formData.email}  onChange={handleChange} id="" placeholder='Email*' required />
                 </div>
                 <div className='my-4 flex justify-center items-center gap-4 w-[100%]'>
-                   <input className='mt-1 px-3 py-2 bg-transparent border  border-[#f3f3f3] placeholder-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1' type="number" name="contactNum"  value={formData.contactNum}  onChange={handleChange} id="" placeholder='Contact Number' required />
+                   <input style={{ color: 'white' }} className='mt-1 px-3 py-2 bg-transparent border  border-[#f3f3f3] placeholder-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1' type="number" name="contactNum"  value={formData.contactNum}  onChange={handleChange} id="" placeholder='Contact Number' required />
                   <select  onChange={handleChange} value={formData.services} name="services"  className='text-[#f3f3f3] mt-1 px-3 py-2 bg-transparent border  border-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1'>
-                      <option className='bg-greenColor ' value='Service 1'>Service 1</option>
-                      <option className='bg-greenColor ' value='Service 2'>Service 2</option>
-                      <option className='bg-greenColor ' value='Service 3'>Service 3</option>
+                      <option className='bg-greenColor ' value=''>Select a Service</option>
+                      <option className='bg-greenColor ' value='House Cleainging'>House Cleaning</option>
+                      <option className='bg-greenColor ' value='Window Cleaning'>Window Cleaing</option>
+                      <option className='bg-greenColor ' value='Sofa Cleaning'>Sofa Cleaning</option>
                   </select>
                 </div>
                 <div className='my-4 flex justify-center items-center gap-4 w-[100%]'>
                   
-                   <textarea className='mt-1 px-3 py-2 bg-transparent border  border-[#f3f3f3] placeholder-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1' type='text' placeholder='Message' name="message" value={formData.message}  onChange={handleChange} id="" rows='5' />
+                   <textarea   style={{ color: 'white' }}  className='mt-1 px-3 py-2 bg-transparent border  border-[#f3f3f3] placeholder-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1' type='text' placeholder='Message' name="message" value={formData.message}  onChange={handleChange} id="" rows='5' />
                 </div>
+              {storeLatLng?.lat && (   <div className='my-4 flex justify-center items-center gap-4 w-[100%]'>
+                  
+                   <textarea className='mt-1 px-3 py-2 bg-transparent border text-white  border-[#f3f3f3] placeholder-[#f3f3f3] focus:outline-none focus:border-[#f3f3f3] focus:ring-[#f3f3f3] block w-full rounded-md sm:text-sm focus:ring-1' type='text' readOnly placeholder='location' name='location'  value={`https://www.google.com/maps?q=${storeLatLng?.lat},${storeLatLng?.lng}`}  id="" rows='3' />
+                </div>)}
                 <div className='my-6 flex justify-start items-center gap-4 w-[100%]'>
                   
          <label className='flex items-center justify-center text-white'>
@@ -169,11 +160,11 @@ threshold={targetRef}
           onChange={handleCheckboxChange}
           className='mr-5 w-[30px] h-[30px] rounded-full'
         />
-       Do you want share locations?
+       Do you want to share locations?
       </label>
-      <a className='text-white' href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
+    {storeLatLng?.lat && (<a className='text-white' href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
       Open in Google Maps
-    </a>
+    </a>)}  
   </div>
                
  <button type='submit' > 
@@ -183,7 +174,7 @@ threshold={targetRef}
             </form>
            
             {/* {viewMap === true ?  <div id='map' className='absolute z-50 top-0 left-0 w-full h-full'><button onClick={()=> setViewMap(false)} className='text-white bg-red-700 py-4 px-6'>Close</button> <MapView   customIcon={customIcon} /></div>  : null } */}
-           {isChecked && (<div id='map' className='absolute z-50 top-0 left-0 w-full h-full'><button onClick={()=> setIsChecked(false)} className='text-white bg-red-700 py-4 px-6'>Close</button> <MapView   customIcon={customIcon} /></div>)}
+           {isChecked && (<div id='map' className='absolute z-50 top-0 left-0 w-full h-full'><button onClick={()=> setIsChecked(false)} className='text-white bg-red-700 py-4 px-6'>Close</button> <MapView setStoreLatLng={setStoreLatLng}  customIcon={customIcon} /></div>)}
             </div>
            </div>
            <div className='w-[55%] p-0'>
@@ -200,3 +191,8 @@ threshold={targetRef}
 }
 
 export default Contactus
+
+
+
+
+

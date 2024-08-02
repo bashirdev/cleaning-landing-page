@@ -7,16 +7,18 @@ import { Circle, MapContainer, Marker, Popup, TileLayer, useMapEvents } from 're
 
 // Define the coordinates for the center of the map
 
-const DraggableMarker = ({ position, setUserPosition,customIcon}) => {
+const DraggableMarker = ({ position, setUserPosition,customIcon, setStoreLatLng}) => {
   const [draggable, setDraggable] = useState(true);
   const markerRef = useRef(null);
-   window.localStorage.setItem('positions', JSON.stringify(position))
-  useMapEvents({
+
+
+  useMapEvents({ 
     dragend() {
       const marker = markerRef.current;
-   
+ 
       if (marker != null) {
         setUserPosition(marker.getLatLng());
+       
       }
     },
   });
@@ -29,6 +31,7 @@ const DraggableMarker = ({ position, setUserPosition,customIcon}) => {
           const marker = markerRef.current;
           if (marker != null) {
             setUserPosition(marker.getLatLng());
+            setStoreLatLng(marker.getLatLng())
           }
         },
       }}
@@ -70,17 +73,23 @@ const DraggableMarker = ({ position, setUserPosition,customIcon}) => {
 //   );
 // };
 
-const MapView = ({ customIcon }) => {
+const MapView = ({ customIcon, setStoreLatLng }) => {
   const [userPosition, setUserPosition] = useState([23.453168015916194, 57.623570812644]);
   const [accuracy, setAccuracy] = useState(null);
-  console.log(userPosition)
-  const googleMapsUrl= `https://www.google.com/maps?q=${userPosition.lat}&${userPosition.lng}&z=15`;
+
+ 
+
+  const googleMapsUrl = `https://www.google.com/maps?q=${userPosition?.lat},${userPosition?.lng}`;
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const {latitude, longitude ,accuracy} = position.coords;
+
         setUserPosition([latitude, longitude])  
         setAccuracy(accuracy);
+       
+        // window.location.reload();
+        window.location.assign("#contactus");
       },
       (error) => {
         console.error(error);
@@ -105,18 +114,8 @@ const MapView = ({ customIcon }) => {
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">Bashir Ahammed</a> contributors'
     />
-    {/* <Marker position={[position?.latitude, position?.longitude]} icon={customIcon}>
-      <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
-      </Popup>
-      <Circle
-        center={[position?.latitude, position?.longitude]}
-        radius={position?.accuracy}
-        pathOptions={{ color: 'blue', fillColor: 'blue', fillOpacity: 0.2 }}
-      />
-    </Marker> */}
-   {/* <LocationMarker position={position} customIcon={customIcon} /> */}
-   <DraggableMarker position={userPosition} setUserPosition={setUserPosition} customIcon={customIcon} />
+  
+   <DraggableMarker position={userPosition} setStoreLatLng={setStoreLatLng} setUserPosition={setUserPosition} customIcon={customIcon} />
    {accuracy && (
         <Circle
           center={userPosition}
