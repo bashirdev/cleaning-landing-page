@@ -2,16 +2,16 @@ import { Aboutus, Contactus, Footer, Hero, OurExpert, Ourclient, Pricing, Servic
 import Nav from "./sections/Nav";
 // src/index.js
 import 'leaflet/dist/leaflet.css';
-import React, { createContext, useEffect, useState } from 'react';
-export const LocalStorageContext = createContext();
+// import React, { createContext, useEffect, useState } from 'react';
+// export const LocalStorageContext = createContext();
 
 const App = () => {
-    const [localStorageData, setLocalStorageData] = useState({});
- console.log(localStorageData)
-    useEffect(() => {
-      const data = JSON.parse(localStorage.getItem('positions')) || {};
-      setLocalStorageData(data);
-    }, []);
+//     const [localStorageData, setLocalStorageData] = useState({});
+//  console.log(localStorageData)
+//     useEffect(() => {
+//       const data = JSON.parse(localStorage.getItem('positions')) || {};
+//       setLocalStorageData(data);
+//     }, []);
   return (
     <main className='relative  w-full'>
      <Nav />
