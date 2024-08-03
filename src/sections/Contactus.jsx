@@ -24,7 +24,7 @@ const Contactus = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [mapLink, setMapLink] = useState(``)
   const googleMapsUrl = `https://www.google.com/maps?q=${storeLatLng?.lat},${storeLatLng?.lng}`;
-  console.log(googleMapsUrl)
+  
 
   const customIcon = new L.Icon({
     iconUrl: iconMap,

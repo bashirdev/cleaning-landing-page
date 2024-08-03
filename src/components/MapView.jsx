@@ -77,14 +77,14 @@ const MapView = ({ customIcon, setStoreLatLng }) => {
   const [userPosition, setUserPosition] = useState([23.453168015916194, 57.623570812644]);
   const [accuracy, setAccuracy] = useState(null);
 
- 
+
 
   const googleMapsUrl = `https://www.google.com/maps?q=${userPosition?.lat},${userPosition?.lng}`;
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
       (position) => {
         const {latitude, longitude ,accuracy} = position.coords;
-
+       
         setUserPosition([latitude, longitude])  
         setAccuracy(accuracy);
        
